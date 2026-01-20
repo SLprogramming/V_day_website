@@ -1,0 +1,30 @@
+
+@import "tailwindcss";
+
+
+:root{
+  --primary-bg:#F8F0FB;
+  --primary-accent:#FF85A1;
+  --secondary-accent:#FFC2D1;
+  --highlight-color:#BDE0FE;
+  
+}
+
+:root {
+  
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--primary-bg);
+  color:black;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
