@@ -37,11 +37,11 @@ const App = () => {
         )}
 
         {/* LOADING SCREEN - Fades in over the lock, then stays until finished */}
-        {phase === 'loading' && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#F8F0FB] animate-in fade-in duration-500">
+        
+          <div className={`fixed inset-0 ${phase === 'loading' ? 'z-50' : '-z-10'} flex items-center justify-center bg-[#F8F0FB] animate-in fade-in duration-500`}>
              <Loading />
           </div>
-        )}
+  
 
         {/* MAIN PAGE - Fades in beautifully when loading is done */}
         {phase === 'unlocked' && (
