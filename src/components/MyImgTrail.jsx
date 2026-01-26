@@ -2,22 +2,22 @@ import React from 'react'
 import ImageTrail from './ImageTrail/ImageTrail'
 
 const photos = [
-    '/public/photos/photo_1.jpg',
-    '/public/photos/photo_2.jpg',
-    '/public/photos/photo_3.jpg',
-    '/public/photos/photo_4.jpg',
-    '/public/photos/photo_5.jpg',
-    '/public/photos/photo_6.jpg',
-    '/public/photos/photo_7.jpg',
-    '/public/photos/photo_8.jpg',
-    '/public/photos/photo_9.jpg',
-    '/public/photos/photo_10.jpg',
-    '/public/photos/photo_11.jpg',
-    '/public/photos/photo_12.jpg',
-    '/public/photos/photo_13.jpg',
-    '/public/photos/photo_14.jpg',
-    '/public/photos/photo_15.jpg',
-    '/public/photos/photo_16.jpg',
+    '/photos/photo_1.jpg',
+    '/photos/photo_2.jpg',
+    '/photos/photo_3.jpg',
+    '/photos/photo_4.jpg',
+    '/photos/photo_5.jpg',
+    '/photos/photo_6.jpg',
+    '/photos/photo_7.jpg',
+    '/photos/photo_8.jpg',
+    '/photos/photo_9.jpg',
+    '/photos/photo_10.jpg',
+    '/photos/photo_11.jpg',
+    '/photos/photo_12.jpg',
+    '/photos/photo_13.jpg',
+    '/photos/photo_14.jpg',
+    '/photos/photo_15.jpg',
+    '/photos/photo_16.jpg',
 ]
 
 const MyImgTrail = () => {
