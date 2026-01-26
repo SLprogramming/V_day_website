@@ -13,6 +13,11 @@ const photos = [
     '/public/photos/photo_9.jpg',
     '/public/photos/photo_10.jpg',
     '/public/photos/photo_11.jpg',
+    '/public/photos/photo_12.jpg',
+    '/public/photos/photo_13.jpg',
+    '/public/photos/photo_14.jpg',
+    '/public/photos/photo_15.jpg',
+    '/public/photos/photo_16.jpg',
 ]
 
 const MyImgTrail = () => {
