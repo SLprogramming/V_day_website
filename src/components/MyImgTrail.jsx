@@ -22,13 +22,26 @@ const photos = [
 
 const MyImgTrail = () => {
   return (
-    <div style={{ height: "100vh", position: 'relative', overflow: 'hidden'}}>
+    <>
+    <h2 className="text-5xl font-serif text-center mb-4" style={{ color: 'var(--primary-accent)' }}>
+            Memories Trail
+          </h2>
+    <div 
+  style={{ height: "100vh", position: 'relative' }} 
+  className='photo-frame flex items-center justify-center'
+>
+  <img src='/public/Tgs/air-balloon.png' className='w-40 absolute z-50 -top-25 left-10' />
+  <img src='/public/Tgs/relationship.png' className='w-40 absolute z-50 -top-55 right-80' />
+  <img src='/public/Tgs/bouquet.png' className='w-40 absolute z-1000 bottom-5 right-10' />
+
   <ImageTrail
+  
     key={'imgTrail'}
     items={photos}
     variant="7"
   />
 </div>
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Lock from './components/Lock'
 import ClickSpark from './components/ClickSpark'
 import MainPage from './MainPage'
@@ -7,6 +7,12 @@ import Loading from './components/Loading'
 const App = () => {
   // phases: 'lock' | 'loading' | 'unlocked'
   const [phase, setPhase] = useState('lock');
+  useEffect(() => {
+    let expiredIn = localStorage.getItem('expiredIn');
+    if (expiredIn && Date.now() < parseInt(expiredIn)) {
+      setPhase('unlocked');
+    }
+  },[])
 
   const handleUnlock = async () => {
     // 1. Move to loading phase
@@ -17,7 +23,10 @@ const App = () => {
     
     // 3. Switch to main page phase
     setPhase('unlocked');
+    localStorage.setItem('expiredIn', Date.now() + 5 * 60 * 1000); 
   }
+
+  
 
   return (
     <ClickSpark
