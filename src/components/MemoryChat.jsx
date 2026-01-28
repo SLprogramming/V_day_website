@@ -56,7 +56,7 @@ const MemoryChat = () => {
       {/* Chat Header - Fixed */}
       <div className="bg-(--secondary-accent) p-3 md:p-4 flex items-center gap-3 border-b border-(--primary-accent)/20 shadow-sm relative z-20">
         <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-(--primary-accent) overflow-hidden flex items-center justify-center text-white font-bold shadow-inner text-sm md:text-base">
-          <img src="/public/photos/supyae.jpg" alt="" />
+          <img src="/photos/supyae.jpg" alt="" />
         </div>
         <div>
           <h3 className="text-(--primary-bg) font-bold text-xs md:text-sm leading-none">Ma Su Pyae</h3>

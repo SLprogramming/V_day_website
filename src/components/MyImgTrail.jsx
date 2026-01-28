@@ -30,9 +30,9 @@ const MyImgTrail = () => {
   style={{ height: "100vh", position: 'relative' }} 
   className='photo-frame flex items-center justify-center'
 >
-  <img src='/public/Tgs/air-balloon.png' className='w-40 absolute z-50 -top-25 left-10' />
-  <img src='/public/Tgs/relationship.png' className='w-40 absolute z-50 -top-55 right-80' />
-  <img src='/public/Tgs/bouquet.png' className='w-40 absolute z-1000 bottom-5 right-10' />
+  <img src='/Tgs/air-balloon.png' className='w-40 absolute z-50 -top-25 left-10' />
+  <img src='/Tgs/relationship.png' className='w-40 absolute z-50 -top-55 right-80' />
+  <img src='/Tgs/bouquet.png' className='w-40 absolute z-1000 bottom-5 right-10' />
 
   <ImageTrail
   

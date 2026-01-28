@@ -8,7 +8,7 @@ const memories = [
     title: "With the new shirt that you gifted me",
     location: "Time City",
     message: "Do you Remember? we got trouble choosing this shirt together! 👕❤️",
-    image: "/public/cartoon_pic/photo_1.jpg",
+    image: "/cartoon_pic/photo_1.jpg",
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ const memories = [
     title: "On Your Birthday",
     location: "Your Fav Wai Wai Aung",
     message: "Wai Wai Aung and Htoo Ice Cream made your birthday extra special! 🎂",
-    image: "/public/cartoon_pic/photo_2.jpg",
+    image: "/cartoon_pic/photo_2.jpg",
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const memories = [
     title: "Force Me to Selfie 🤪🤪",
     location: "Time City",
     message: "I'm too shy for selfies, but for you, I'll make an exception!",
-    image: "/public/cartoon_pic/photo_3.jpg",
+    image: "/cartoon_pic/photo_3.jpg",
   },
   {
     id: 4,
@@ -32,7 +32,7 @@ const memories = [
     title: "Waiting For JOJO",
     location: "Time City",
     message: "We are hungry and excited for JOJO! Best way to end the year together.",
-    image: "/public/cartoon_pic/photo_4.jpg",
+    image: "/cartoon_pic/photo_4.jpg",
   }
 ];
 
