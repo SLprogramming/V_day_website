@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
 import Lock from './components/Lock'
 import ClickSpark from './components/ClickSpark'
 import MainPage from './MainPage'
@@ -6,27 +7,32 @@ import Loading from './components/Loading'
 
 const App = () => {
   // phases: 'lock' | 'loading' | 'unlocked'
-  const [phase, setPhase] = useState('lock');
+  const [phase, setPhase] = useState('unlocked'); // Default back to lock for security
+
+  // Framer Motion Scroll Progress Logic
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   useEffect(() => {
     let expiredIn = localStorage.getItem('expiredIn');
     if (expiredIn && Date.now() < parseInt(expiredIn)) {
       setPhase('unlocked');
     }
-  },[])
+  }, [])
 
   const handleUnlock = async () => {
-    // 1. Move to loading phase
     setPhase('loading');
     
-    // 2. Wait 3 seconds for the loading animation
+    // Wait for the loading animation (3 seconds)
     await new Promise((resolve) => setTimeout(resolve, 3000));
     
-    // 3. Switch to main page phase
     setPhase('unlocked');
     localStorage.setItem('expiredIn', Date.now() + 5 * 60 * 1000); 
   }
-
-  
 
   return (
     <ClickSpark
@@ -38,25 +44,41 @@ const App = () => {
     >
       <div className="relative min-h-screen w-full bg-[#F8F0FB] overflow-hidden">
         
-        {/* LOCK SCREEN - Visible at start */}
+        {/* 1. TOP PROGRESS BAR - Only visible when unlocked */}
+        {phase === 'unlocked' && (
+          <motion.div 
+            className="fixed top-0 left-0 right-0 h-1.5 z-[100] origin-left"
+            style={{ 
+              scaleX, 
+              background: 'linear-gradient(to right, var(--secondary-accent), var(--primary-accent))',
+              boxShadow: '0 2px 10px rgba(255, 133, 161, 0.3)'
+            }}
+          />
+        )}
+
+        {/* LOCK SCREEN */}
         {phase === 'lock' && (
           <div className="animate-in fade-in duration-700">
             <Lock onUnlockSuccess={handleUnlock} />
           </div>
         )}
 
-        {/* LOADING SCREEN - Fades in over the lock, then stays until finished */}
-        
-          <div className={`fixed inset-0 ${phase === 'loading' ? 'z-50' : '-z-10'} flex items-center justify-center bg-[#F8F0FB] animate-in fade-in duration-500`}>
-             <Loading />
+        {/* LOADING SCREEN */}
+        {phase === 'loading' && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#F8F0FB] animate-in fade-in duration-500">
+            <Loading />
           </div>
-  
+        )}
 
-        {/* MAIN PAGE - Fades in beautifully when loading is done */}
+        {/* MAIN PAGE */}
         {phase === 'unlocked' && (
-          <div className="animate-in fade-in zoom-in-95 duration-1000 ease-out">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+          >
             <MainPage />
-          </div>
+          </motion.div>
         )}
 
       </div>
