@@ -7,7 +7,7 @@ import Loading from './components/Loading'
 
 const App = () => {
   // phases: 'lock' | 'loading' | 'unlocked'
-  const [phase, setPhase] = useState('unlocked'); // Default back to lock for security
+  const [phase, setPhase] = useState('lock'); // Default back to lock for security
 
   // Framer Motion Scroll Progress Logic
   const { scrollYProgress } = useScroll();
