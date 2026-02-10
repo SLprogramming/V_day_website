@@ -114,7 +114,7 @@ const conversations = [
       {/* 2. Side Sticky Note (Visible on Large Screens, Below on Mobile) */}
       <motion.div 
         initial={{ opacity: 0, rotate: 10, x: 50 }}
-        animate={{ opacity: 1, rotate: 2, x: 0 }}
+        whileInView={{ opacity: 1, rotate: 2, x: 0 }}
         transition={{ delay: .4, duration: 0.8 }}
         className="relative w-64 p-6 bg-[#FEF9C3] shadow-xl border-l-8 border-yellow-200"
         style={{ borderRadius: '2px 35px 5px 40px / 40px 5px 35px 2px' }} // Custom "torn" paper edges
