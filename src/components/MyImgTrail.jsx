@@ -44,7 +44,7 @@ const MyImgTrail = () => {
       />
 
       {/* The Image Trail Container */}
-      <div className="relative w-full h-[70vh] cursor-none">
+      <div className="relative w-full h-[80vh] cursor-none">
         <ImageTrail
           items={photos}
           variant="7" // Assuming variant 7 has a nice fading/scaling logic
