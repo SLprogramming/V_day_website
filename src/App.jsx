@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, useScroll, useSpring ,AnimatePresence} from "framer-motion";
+import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import Lock from "./components/Lock";
 import ClickSpark from "./components/ClickSpark";
 import MainPage from "./MainPage";
@@ -8,17 +8,41 @@ import Loading from "./components/Loading";
 const App = () => {
   // phases: 'lock' | 'loading' | 'unlocked'
   const [phase, setPhase] = useState("lock"); // Default back to lock for security
-  
+
   const [theme, setTheme] = useState(
     localStorage.getItem("preferred-theme") || "default",
   );
   const [isOpen, setIsOpen] = useState(false);
   const themes = [
-  { id: 'default', name: 'Pink', icon: '🌸', color: '#FF85A1' ,highlight:'#FFC2D1' },
-  { id: 'forest', name: 'Forest', icon: '🌲', color: '#386641',highlight:'#A7C957' },
-  { id: 'cool', name: 'Cool', icon: '❄️', color: '#05668D',highlight:'#427AA1' },
-  { id: 'sunset', name: 'Sunset', icon: '🌅', color: '#E63946',highlight:'#F4A261' },
-];
+    {
+      id: "default",
+      name: "Pink",
+      icon: "🌸",
+      color: "#FF85A1",
+      highlight: "#FFC2D1",
+    },
+    {
+      id: "forest",
+      name: "Forest",
+      icon: "🌲",
+      color: "#386641",
+      highlight: "#A7C957",
+    },
+    {
+      id: "cool",
+      name: "Cool",
+      icon: "❄️",
+      color: "#05668D",
+      highlight: "#427AA1",
+    },
+    {
+      id: "sunset",
+      name: "Sunset",
+      icon: "🌅",
+      color: "#E63946",
+      highlight: "#F4A261",
+    },
+  ];
 
   // 2. This runs every time the 'theme' changes
   useEffect(() => {
@@ -70,47 +94,65 @@ const App = () => {
     >
       <div className="relative min-h-screen w-full bg-[#F8F0FB] overflow-hidden">
         <div className="fixed top-10 right-10 z-51 flex items-center justify-center">
-    {/* Theme Buttons Wrapper */}
-    <AnimatePresence>
-      {isOpen && themes.map((t, i) => {
-        // Calculate the angle for the semi-circle (from 90° to 180°)
-        // To arrange them in a top-right arc:
-        const angle = (i * (110 / (themes.length - 1))) + 80; 
-        const radius = 85; // Distance from the center button
-        
-        // Convert polar coordinates to X and Y
-        const x = Math.cos(angle * (Math.PI / 180)) * radius;
-        const y = Math.sin(angle * (Math.PI / 180)) * radius;
+          {/* Theme Buttons Wrapper */}
+          <AnimatePresence>
+            {isOpen &&
+              themes.map((t, i) => {
+                // Logic stays the same
+                const angle = i * (110 / (themes.length - 1)) + 80;
+                const radius = 85;
 
-        return (
+                const x = Math.cos(angle * (Math.PI / 180)) * radius;
+                const y = Math.sin(angle * (Math.PI / 180)) * radius;
+
+                return (
+                  <motion.button
+                    key={t.id}
+                    layout // Added to stabilize position during state changes
+                    initial={{ opacity: 0, x: 0, y: 0, scale: 0 }}
+                    animate={{ opacity: 1, x: x, y: y, scale: 1 }}
+                    exit={{
+                      opacity: 0,
+                      x: 0,
+                      y: 0,
+                      scale: 0,
+                      transition: { duration: 0.2 }, // Faster exit prevents the "glitchy" overlap
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 20,
+                      delay: i * 0.05,
+                    }}
+                    onClick={() => {
+                      setTheme(t.id);
+                      setIsOpen(false);
+                    }}
+                    style={{
+                      borderColor: t.color,
+                      backgroundColor:
+                        t.id === theme
+                          ? t.highlight
+                          : "rgba(255, 255, 255, 0.8)",
+                      // Use a stable hex/rgba for background
+                    }}
+                    className="absolute w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-xl   border-2 "
+                  >
+                    {t.icon}
+                  </motion.button>
+                );
+              })}
+          </AnimatePresence>
+
+          {/* Main Toggle Button */}
           <motion.button
-            key={t.id}
-            initial={{ opacity: 0, x: 0, y: 0, scale: 0 }}
-            animate={{ opacity: 1, x: x, y: y, scale: 1 }}
-            exit={{ opacity: 0, x: 0, y: 0, scale: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20, delay: i * 0.05 }}
-            onClick={() => {
-              setTheme(t.id);
-              setIsOpen(false);
-            }}
-            style={{ borderColor: t.color ,backgroundColor: t.id === theme ? t.highlight : "transparent" }}
-            className="absolute w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-xl hover:scale-110 transition-scale duration-150 active:scale-90 border-2 "
+            onClick={() => setIsOpen(!isOpen)}
+            animate={{ rotate: isOpen ? 135 : 0 }}
+            className="relative z-50 w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-center text-2xl"
           >
-            {t.icon}
+            <span className="text-[var(--primary-accent)]">🎨</span>
           </motion.button>
-        );
-      })}
-    </AnimatePresence>
-
-    {/* Main Toggle Button */}
-    <motion.button
-      onClick={() => setIsOpen(!isOpen)}
-      animate={{ rotate: isOpen ? 135 : 0 }}
-      className="relative z-50 w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-center text-2xl"
-    >
-      <span className="text-[var(--primary-accent)]">🎨</span>
-    </motion.button>
-  </div>
+        </div>
         {/* 1. TOP PROGRESS BAR - Only visible when unlocked */}
         {phase === "unlocked" && (
           <motion.div
