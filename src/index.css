@@ -2,12 +2,48 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
 
-:root{
-  --primary-bg:#F8F0FB;
-  --primary-accent:#FF85A1;
-  --secondary-accent:#FFC2D1;
-  --highlight-color:#BDE0FE;
-  --new-bg:#fdf2f8;
+:root {
+  --primary-bg: #F8F0FB;
+  --primary-accent: #FF85A1;
+  --secondary-accent: #FFC2D1;
+  --highlight-color: #BDE0FE;
+  --new-bg: #fdf2f8;
+  /* Text Colors */
+  --text-main: #4A4A4A;      /* Soft Charcoal */
+  --text-contrast: #FFFFFF;  /* White for headers */
+}
+
+.theme-forest {
+  --primary-bg: #F0F4EF;
+  --primary-accent: #386641;
+  --secondary-accent: #A7C957;
+  --highlight-color: #BC4749;
+  --new-bg: #E8EDDF;
+  /* Text Colors */
+  --text-main: #1B2E1D;      /* Deep Dark Green */
+  --text-contrast: #FFFFFF;  /* White */
+}
+
+.theme-cool {
+  --primary-bg: #EBF2FA;
+  --primary-accent: #05668D;
+  --secondary-accent: #427AA1;
+  --highlight-color: #96E6B3;
+  --new-bg: #F0F7FA;
+  /* Text Colors */
+  --text-main: #1D2D44;      /* Navy Slate */
+  --text-contrast: #FFFFFF;  /* White */
+}
+
+.theme-sunset {
+  --primary-bg: #FFF3E0;
+  --primary-accent: #E63946;
+  --secondary-accent: #F4A261;
+  --highlight-color: #5D2E46;
+  --new-bg: #FFEDD5;
+  /* Text Colors */
+  --text-main: #432818;      /* Earthy Brown */
+  --text-contrast: #FFFFFF;  /* White */
 }
 
 :root {

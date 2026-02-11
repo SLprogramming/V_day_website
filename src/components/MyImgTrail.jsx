@@ -9,6 +9,18 @@ const photos = [
     '/photos/photo_10.jpg', '/photos/photo_11.jpg', '/photos/photo_12.jpg',
     '/photos/photo_13.jpg', '/photos/photo_14.jpg', '/photos/photo_15.jpg',
     '/photos/photo_16.jpg',
+    '/photos/photo_17.jpg',
+    '/photos/photo_18.jpg',
+    '/photos/photo_19.jpg',
+    '/photos/photo_20.jpg',
+    '/photos/photo_21.jpg',
+    '/photos/photo_22.jpg',
+    '/photos/photo_23.jpg',
+    '/photos/photo_24.jpg',
+    '/photos/photo_25.jpg',
+    '/photos/photo_26.jpg',
+    '/photos/photo_27.jpg',
+    '/photos/photo_28.jpg',
 ]
 
 const MyImgTrail = () => {

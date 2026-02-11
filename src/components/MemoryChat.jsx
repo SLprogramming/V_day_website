@@ -51,23 +51,24 @@ const conversations = [
 ];
 
   return (
-    <div className="relative flex flex-col lg:flex-row items-center justify-center gap-10 min-h-screen p-4 overflow-hidden">
-     
+    <div className="relative flex flex-col lg:flex-row items-center justify-center gap-10 min-h-screen p-4 overflow-hidden bg-[var(--primary-bg)] transition-colors duration-500">
+      
       {/* 1. Main Chat Component */}
-      <div className="w-full max-w-[450px] font-sans shadow-2xl rounded-3xl overflow-hidden border border-white/20 z-10 bg-white">
+      <div className="w-full max-w-[450px] font-sans shadow-2xl rounded-3xl overflow-hidden border border-[var(--secondary-accent)] z-10 bg-[var(--new-bg)]">
         {/* Chat Header */}
-        <div className="bg-gradient-to-r from-(--secondary-accent) to-(--primary-accent) p-4 flex items-center gap-3 shadow-md relative z-20">
+        <div className="bg-gradient-to-r from-[var(--secondary-accent)] to-[var(--primary-accent)] p-4 flex items-center gap-3 shadow-md relative z-20">
           <div className="w-10 h-10 rounded-full border-2 border-white/50 overflow-hidden shadow-sm">
             <img src="/photos/supyae.jpg" alt="Su Pyae" className="w-full h-full object-cover" />
           </div>
-          <div className="flex flex-col text-white">
+          {/* Using --text-contrast for the header names */}
+          <div className="flex flex-col text-[var(--text-contrast)]">
             <h3 className="font-bold text-sm md:text-base leading-none">Ma Su Pyae</h3>
             <span className="text-[10px] opacity-80 mt-1 italic">Our beautiful beginning</span>
           </div>
         </div>
 
         {/* Chat Body */}
-        <div className="bg-[#FDF8FD] p-4 md:p-8 flex flex-col h-[500px] overflow-y-auto scroll-smooth 
+        <div className="bg-[var(--primary-bg)] p-4 md:p-8 flex flex-col h-[500px] overflow-y-auto scroll-smooth 
           [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {conversations.map((msg) => (
             <motion.div
@@ -77,27 +78,31 @@ const conversations = [
               viewport={{ once: true }}
               className={`flex flex-col relative mb-6 ${msg.sender === 'me' ? 'items-end' : 'items-start'}`}
             >
-              {/* Handwritten Note with 'InView' Animation */}
+              {/* Handwritten Note - Primary Accent color */}
               {msg.note && (
                 <motion.span 
                   initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
                   whileInView={{ opacity: 1, scale: 1, rotate: -6 }}
-                  transition={{ 
-                    duration: 0.4, 
-                    delay: 0.1, // Delay so the bubble appears first, then the note "scribbles" in
-                    ease: "easeOut" 
-                  }}
+                  transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
                   viewport={{ once: true }}
                   className={`absolute -top-7 ${msg.sender === 'me' ? 'right-4' : 'left-4'} 
-                  font-['Caveat'] text-(--primary-accent) text-base md:text-lg whitespace-nowrap drop-shadow-sm pointer-events-none`}
+                  font-['Caveat'] text-[var(--primary-accent)] text-base md:text-lg whitespace-nowrap drop-shadow-sm pointer-events-none`}
                 >
                   {msg.note}
                 </motion.span>
               )}
-              <div className={`relative max-w-[85%] px-4 py-2 rounded-2xl text-xs md:text-sm shadow-sm ${msg.sender === 'me' ? 'bg-(--highlight-color) text-gray-800 rounded-tr-none' : 'bg-white border border-pink-100 text-gray-700 rounded-tl-none'}`}>
+
+              {/* Chat Bubble - Dynamic text coloring */}
+              <div className={`relative max-w-[85%] px-4 py-2 rounded-2xl text-xs md:text-sm shadow-sm 
+                ${msg.sender === 'me' 
+                  ? 'bg-[var(--highlight-color)] text-[var(--text-contrast)] rounded-tr-none' 
+                  : 'bg-[var(--new-bg)] border border-[var(--secondary-accent)] text-[var(--text-main)] rounded-tl-none'}`}>
                 {msg.text}
+                
                 {msg.reaction && (
-                  <div className={`absolute -bottom-3 ${msg.sender === 'me' ? '-left-1' : '-right-1'} bg-white border border-pink-50 rounded-full px-1.5 py-0.5 text-xs shadow-sm`}>{msg.reaction}</div>
+                  <div className={`absolute -bottom-3 ${msg.sender === 'me' ? '-left-1' : '-right-1'} bg-[var(--new-bg)] border border-[var(--secondary-accent)] text-[var(--text-main)] rounded-full px-1.5 py-0.5 text-xs shadow-sm`}>
+                    {msg.reaction}
+                  </div>
                 )}
               </div>
               <span className="text-[9px] text-gray-400 mt-1 px-1">{msg.time}</span>
@@ -106,31 +111,27 @@ const conversations = [
         </div>
 
         {/* Romantic Footer */}
-        <div className="bg-white/90 p-3 text-center border-t border-pink-50">
-          <p className="font-['Caveat'] text-(--primary-accent) text-xl italic">Everything changed here... ❤️</p>
+        <div className="bg-[var(--new-bg)] p-3 text-center border-t border-[var(--secondary-accent)]">
+          <p className="font-['Caveat'] text-[var(--primary-accent)] text-xl italic">Everything changed here... ❤️</p>
         </div>
       </div>
 
-      {/* 2. Side Sticky Note (Visible on Large Screens, Below on Mobile) */}
+      {/* 2. Side Sticky Note */}
       <motion.div 
         initial={{ opacity: 0, rotate: 10, x: 50 }}
         whileInView={{ opacity: 1, rotate: 2, x: 0 }}
         transition={{ delay: .4, duration: 0.8 }}
-        className="relative w-64 p-6 bg-[#FEF9C3] shadow-xl border-l-8 border-yellow-200"
-        style={{ borderRadius: '2px 35px 5px 40px / 40px 5px 35px 2px' }} // Custom "torn" paper edges
+        className="relative w-64 p-6 bg-[var(--new-bg)] shadow-xl border-l-8 border-[var(--highlight-color)]"
+        style={{ borderRadius: '2px 35px 5px 40px / 40px 5px 35px 2px' }}
       >
-        {/* Fake "Tape" at the top */}
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-8 bg-white/40 backdrop-blur-sm -rotate-2 shadow-sm border border-white/20" />
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-8 bg-white/20 backdrop-blur-sm -rotate-2 shadow-sm border border-white/10" />
         
-        <div className="font-['Caveat'] text-gray-700 space-y-4 pt-2">
-          <h4 className="text-xl font-bold border-b border-yellow-300 pb-1 text-(--primary-accent)">Memory Note ✍️</h4>
-          <p className="text-lg leading-tight">
+        <div className="font-['Caveat'] space-y-4 pt-2">
+          <h4 className="text-xl font-bold border-b border-[var(--highlight-color)] pb-1 text-[var(--primary-accent)]">Memory Note ✍️</h4>
+          <p className="text-lg leading-tight text-[var(--text-main)]">
             I still remember how fast my heart was beating when I typed that message at 9:11 PM.
           </p>
-          <p className="text-lg leading-tight">
-            I was so worried you'd think I was joking, but you were so sweet about it.
-          </p>
-          <div className="text-right pt-2 font-bold text-(--primary-accent)">
+          <div className="text-right pt-2 font-bold text-[var(--primary-accent)]">
             — Always Yours
           </div>
         </div>
